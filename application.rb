@@ -7,7 +7,8 @@ PAGES_DIRECTORY = File.expand_path('../pages', __FILE__)
 FileUtils.mkdir_p PAGES_DIRECTORY
 
 get '/' do
-  "Welcome to our wiki"
+  @pages = Dir.entries(PAGES_DIRECTORY).reject { |file| file =~ /^\./ }
+  erb :index
 end
 
 get '/new' do
